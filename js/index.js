@@ -163,7 +163,7 @@ function getBusinessData(){
             
         })
         overlayMaps[config.businessData[i].table].on("click",function(feature){
-            
+            handleLayerClick(feature)
         })
     }
     map.on("zoomend",function(e){
@@ -293,7 +293,7 @@ function handlePosition(id){
             coordinates[i][j].reverse()
         }
     }
-    var polygon = L.polygon(coordinates, {color: 'red'})
+    var polygon = L.polygon(coordinates)
     map.fitBounds(polygon.getBounds())
 }
 
@@ -315,8 +315,29 @@ function handleMapZoom(zoom){
     }
 }
 
+/**
+ * 
+ * @param {*} name 
+ */
 function getQueryString(name){
     var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)")
     var r = window.location.search.substr(1).match(reg)
     if(r!=null)return  unescape(r[2]); return null
+}
+
+/**
+ * 处理要素图层点击
+ * @param {*} feature 
+ */
+function handleLayerClick(feature){
+    var a = document.createElement('a')
+    a.setAttribute('href', "#popup")
+    //a.setAttribute('target', '_blank')
+    //a.setAttribute('id', 'startTelMedicine')
+    // 防止反复添加
+    if(document.getElementById('startTelMedicine')) {
+        document.body.removeChild(document.getElementById('startTelMedicine'))
+    }
+    document.body.appendChild(a)
+    a.click()
 }
