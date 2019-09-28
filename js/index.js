@@ -332,7 +332,7 @@ function getQueryString(name){
 function handleLayerClick(feature){
     var a = document.createElement('a')
     a.setAttribute('href', "#popup")
-    //a.setAttribute('target', '_blank')
+    a.setAttribute('target', '_self')
     //a.setAttribute('id', 'startTelMedicine')
     // 防止反复添加
     if(document.getElementById('startTelMedicine')) {
